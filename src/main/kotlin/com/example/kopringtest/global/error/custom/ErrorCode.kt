@@ -8,5 +8,7 @@ enum class ErrorCode(
 ) : ErrorProperty {
     BAD_REQUEST(400, "요청이 잘못되었습니다."),
 
+    USER_NOT_FOUND(404, "유저를 찾지 못함"),
+
     SERVER_INTERNAL_ERROR(500, "서버 에러입니다.")
 }
