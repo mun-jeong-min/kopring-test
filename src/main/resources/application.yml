@@ -1,0 +1,22 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    open-in-view: false
+  datasource:
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:0319}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL:jdbc:mysql://localhost:3306/kop?serverTimezone=UTC&characterEncoding=UTF-8}
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+jwt:
+  secret-key: ${SECRET_KEY:sslakdml3acl3k}
+  access-exp: ${ACCESS_EXP:1800000}
+  refresh-exp: ${REFRESH_EXP:604800000}

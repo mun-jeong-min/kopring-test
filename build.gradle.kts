@@ -42,6 +42,8 @@ dependencies {
     kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
 
     testImplementation("org.springframework.security:spring-security-test")
+
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }
 
 tasks.withType<KotlinCompile> {
