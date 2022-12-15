@@ -1,5 +1,7 @@
 package com.example.kopringtest.global.security.jwt
 
+import com.example.kopringtest.domain.auth.domain.RefreshToken
+import com.example.kopringtest.domain.auth.domain.repository.RefreshTokenRepository
 import com.example.kopringtest.global.error.exception.InvalidJwtException
 import com.example.kopringtest.global.security.auth.AuthDetailsService
 import io.jsonwebtoken.Claims
@@ -16,8 +18,23 @@ import java.util.*
 @Component
 class JwtTokenProvider(
     private val jwtProperties: JwtProperties,
-    private val authDetailsService: AuthDetailsService
+    private val authDetailsService: AuthDetailsService,
+    private val refreshTokenRepository: RefreshTokenRepository
 ) {
+
+    fun generateRefreshToken(id: String): String {
+        val token: String = generateToken(id, "refresh", jwtProperties.refreshExp)
+
+        val refreshToken = RefreshToken(
+            accountId = id,
+            token = token,
+            ttl = jwtProperties.refreshExp
+        )
+
+        refreshTokenRepository.save(refreshToken)
+
+        return token
+    }
 
     fun generateAccessToken(id: String): String {
         return generateToken(id, "access", jwtProperties.accessExp)
